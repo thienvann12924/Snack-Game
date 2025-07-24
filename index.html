@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game - Python Pygame Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #3ae473 0%, #717de6 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+        }
+        
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            background: white;
+            margin: 30px 0;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #f511bc;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #09fcd3;
+            padding-bottom: 10px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .feature {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #c5f007;
+        }
+        
+        .feature h3 {
+            color: #ec1c7d;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .code-block code {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .step {
+            background: #f0f4f8;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .step h4 {
+            color: #f011bf;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .control-item {
+            background: #e6f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .control-item strong {
+            color: #f01ba9;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .video-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .video-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 60px 20px;
+            margin: 20px 0;
+        }
+        
+        .video-placeholder h3 {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .video-placeholder p {
+            color: #888;
+            font-style: italic;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #f3116f;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tech-item {
+            background: #f018c1;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Snake Game</h1>
+            <p>Classic Snake Game is developed with ❤️ using Python & Pygame</p>
+        </header>
+
+        <section class="section">
+            <h2>Project Introduction</h2>
+            <p>Snake Game is a modern version of the classic snake hunting game, developed in Python with the Pygame library. The game offers a nostalgic experience with beautiful pixel art graphics and smooth gameplay.</p>
+
+            <div class="features">
+                <div class="feature">
+                    <h3>🎮 Classic Gameplay</h3>
+                    <p>Control the snake to move, eat food to grow in size, and achieve the highest score possible.</p>
+                </div>
+                <div class="feature">
+                    <h3>🎨 Pixel Art Graphics</h3>
+                    <p>Beautiful interface with high-quality sprite graphics and smooth effects.</p>
+                </div>
+                <div class="feature">
+                    <h3>🔧 Menu System</h3>
+                    <p>Interactive menu with options to adjust speed, toggle sound, and on-screen controls.</p>
+                </div>
+                <div class="feature">
+                    <h3>🎵 Sound Effects</h3>
+                    <p>Dynamic sound effects when eating food and other interactions.</p>
+                </div>
+            </div>
+
+            <h3>💻 Technology Stack</h3>
+            <div class="tech-stack">
+                <span class="tech-item">Python 3.8+</span>
+                <span class="tech-item">Pygame 2.1.2</span>
+                <span class="tech-item">Object-Oriented Programming</span>
+                <span class="tech-item">Custom UI Components</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>⚙️ Installation Guide</h2>
+
+            <div class="step">
+                <h4>Step 1: Install Python</h4>
+                <p>Make sure you have Python 3.8 or higher installed on your machine.</p>
+                <div class="code-block">
+                    <code>python --version</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <h4>Step 2: Clone or Download the Project</h4>
+                <p>Download the source code from the repository or copy the files into your project directory.</p>
+                <div class="code-block">
+                    <code>git clone https://github.com/thienvann12924/Snack-Game.git<br>cd snake-game</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <h4>Step 3: Install Dependencies</h4>
+                <p>Install the Pygame library using pip:</p>
+                <div class="code-block">
+                    <code>pip install pygame</code>
+                </div>
+                <p>Or use requirements.txt:</p>
+                <div class="code-block">
+                    <code>pip install -r requirements.txt</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <h4>Step 4: Run the Game</h4>
+                <p>Launch the game using the command:</p>
+                <div class="code-block">
+                    <code>python main.py</code>
+                </div>
+            </div>
+
+            <div class="step">
+                <h4>Step 5: On Replit</h4>
+                <p>To run on Replit, simply click the "Run" button or use the command:</p>
+                <div class="code-block">
+                    <code>python3 main.py</code>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎮 User Guide</h2>
+
+            <h3>Game Controls</h3>
+            <div class="controls">
+                <div class="control-item">
+                    <strong>↑ ↓ ← →</strong>
+                    <span>Arrow keys to move the snake</span>
+                </div>
+                <div class="control-item">
+                    <strong>Menu Button</strong>
+                    <span>Open settings menu</span>
+                </div>
+                <div class="control-item">
+                    <strong>Arrow Keys On/Off</strong>
+                    <span>Toggle on-screen arrow keys</span>
+                </div>
+                <div class="control-item">
+                    <strong>Speed Control</strong>
+                    <span>Change game speed (Slow/Normal)</span>
+                </div>
+                <div class="control-item">
+                    <strong>Mute/Unmute</strong>
+                    <span>Toggle sound</span>
+                </div>
+            </div>
+
+            <h3>How to Play</h3>
+            <ol style="margin-top: 20px; padding-left: 20px;">
+                <li><strong>Objective:</strong> Control the snake to eat food (fruits) to increase score and size</li>
+                <li><strong>Movement:</strong> Use arrow keys or on-screen navigation keys</li>
+                <li><strong>Avoid Collisions:</strong> Do not let the snake run into walls or itself</li>
+                <li><strong>Score Points:</strong> Each time the snake eats food, it grows longer and you gain points</li>
+                <li><strong>Menu:</strong> Click the Menu button to access settings options</li>
+            </ol>
+
+            <h3>Menu Features</h3>
+            <ul style="margin-top: 15px; padding-left: 20px;">
+                <li><strong>Arrow Keys Toggle:</strong> Show/hide on-screen navigation keys</li>
+                <li><strong>Speed Control:</strong> Toggle between slow and normal speed</li>
+                <li><strong>Audio Control:</strong> Toggle game sound</li>
+            </ul>
+        </section>
+
+        <section class="section" id="demo">
+            <h3>Demo</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div class="video-placeholder" style="padding: 40px;">                
+                    <img src="../assets/demo.gif" alt="Gameplay Screenshot" style="max-width: 100%; border-radius: 10px;">
+                </div>              
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>📁 Project Structure</h2>
+            <div class="code-block">
+                <code>snake-game/<br>
+├── main.py              # Main file to run the game<br>
+├── design_elements.py   # UI components library<br>
+├── requirements.txt     # Dependencies<br>
+├── Graphics/           # Folder containing sprite graphics<br>
+│   ├── head_*.png      # Snake head sprite<br>
+│   ├── body_*.png      # Snake body sprite<br>
+│   └── tail_*.png      # Snake tail sprite<br>
+├── images/             # Game images<br>
+│   ├── fruit.png       # Food sprite<br>
+│   └── snake_icon.png  # Game icon<br>
+├── sounds/             # Sound files<br>
+│   └── game_sound.wav  # Sound of eating food<br>
+└── Fonts/              # Font files<br>
+    └── Pixeltype.ttf   # Pixel art font</code>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🚀 Deployment on Replit</h2>
+            <p>This project is designed to run optimally on Replit. Features include:</p>
+            <ul style="margin-top: 15px; padding-left: 20px;">
+                <li> Automatic dependency installation</li>
+                <li> Web audio support</li>
+                <li> Responsive interface</li>
+                <li> No additional setup required</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
