@@ -2,8 +2,19 @@ import pygame
 import sys
 import random
 import math
+import os
 from pygame.math import Vector2
 from design_elements import *
+
+# Function to get resource path for PyInstaller
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and for PyInstaller"""
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 
 # We are using vector instead of list as they are more useful in 2D  calculations
@@ -17,25 +28,25 @@ class Snake:
         # this is direction vector
         self.direction = Vector2(0, 0)
 
-        self.head_up = pygame.image.load('Graphics/head_up.png').convert_alpha()
-        self.head_down = pygame.image.load('Graphics/head_down.png').convert_alpha()
-        self.head_right = pygame.image.load('Graphics/head_right.png').convert_alpha()
-        self.head_left = pygame.image.load('Graphics/head_left.png').convert_alpha()
+        self.head_up = pygame.image.load(resource_path('Graphics/head_up.png')).convert_alpha()
+        self.head_down = pygame.image.load(resource_path('Graphics/head_down.png')).convert_alpha()
+        self.head_right = pygame.image.load(resource_path('Graphics/head_right.png')).convert_alpha()
+        self.head_left = pygame.image.load(resource_path('Graphics/head_left.png')).convert_alpha()
 
-        self.tail_up = pygame.image.load('Graphics/tail_up.png').convert_alpha()
-        self.tail_down = pygame.image.load('Graphics/tail_down.png').convert_alpha()
-        self.tail_right = pygame.image.load('Graphics/tail_right.png').convert_alpha()
-        self.tail_left = pygame.image.load('Graphics/tail_left.png').convert_alpha()
+        self.tail_up = pygame.image.load(resource_path('Graphics/tail_up.png')).convert_alpha()
+        self.tail_down = pygame.image.load(resource_path('Graphics/tail_down.png')).convert_alpha()
+        self.tail_right = pygame.image.load(resource_path('Graphics/tail_right.png')).convert_alpha()
+        self.tail_left = pygame.image.load(resource_path('Graphics/tail_left.png')).convert_alpha()
 
-        self.body_vertical = pygame.image.load('Graphics/body_vertical.png').convert_alpha()
-        self.body_horizontal = pygame.image.load('Graphics/body_horizontal.png').convert_alpha()
+        self.body_vertical = pygame.image.load(resource_path('Graphics/body_vertical.png')).convert_alpha()
+        self.body_horizontal = pygame.image.load(resource_path('Graphics/body_horizontal.png')).convert_alpha()
 
-        self.body_tr = pygame.image.load('Graphics/body_tr.png').convert_alpha()
-        self.body_tl = pygame.image.load('Graphics/body_tl.png').convert_alpha()
-        self.body_br = pygame.image.load('Graphics/body_br.png').convert_alpha()
-        self.body_bl = pygame.image.load('Graphics/body_bl.png').convert_alpha()
-        self.fruit_eat_sound = pygame.mixer.Sound('sounds/game_sound.mp3')
-        self.collision_sound = pygame.mixer.Sound('sounds/collision_sound.mp3')
+        self.body_tr = pygame.image.load(resource_path('Graphics/body_tr.png')).convert_alpha()
+        self.body_tl = pygame.image.load(resource_path('Graphics/body_tl.png')).convert_alpha()
+        self.body_br = pygame.image.load(resource_path('Graphics/body_br.png')).convert_alpha()
+        self.body_bl = pygame.image.load(resource_path('Graphics/body_bl.png')).convert_alpha()
+        self.fruit_eat_sound = pygame.mixer.Sound(resource_path('sounds/game_sound.mp3'))
+        self.collision_sound = pygame.mixer.Sound(resource_path('sounds/collision_sound.mp3'))
         self.head = self.head_right
         self.alive = True
         # importing snake graphics
@@ -260,11 +271,11 @@ SPEED = 300
 # screen variable BASED ON CELL
 screen = pygame.display.set_mode((CELL_NUMBER * CELL_SIZE, CELL_NUMBER * CELL_SIZE))
 pygame.display.set_caption("Snake")
-icon = pygame.image.load('images/snake_icon.png').convert_alpha()
+icon = pygame.image.load(resource_path('images/snake_icon.png')).convert_alpha()
 pygame.display.set_icon(icon)
 
 # loading image of fruit
-fruit_img = pygame.image.load('images/fruit.png').convert_alpha()
+fruit_img = pygame.image.load(resource_path('images/fruit.png')).convert_alpha()
 
 # dispaly surface is main surface
 # we can create another surfaces with pygame.Surface(size) method
@@ -278,7 +289,7 @@ SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, SPEED)
 
 # LOADING GAME FONT
-game_font = pygame.font.Font('Fonts/Pixeltype.ttf', 25)
+game_font = pygame.font.Font(resource_path('Fonts/Pixeltype.ttf'), 25)
 
 # creating clock object for manipulating fps of game
 clock = pygame.time.Clock()
