@@ -1,5 +1,7 @@
 # Snake Game Made with Python [Pygame]
 
+# For SOM Admin: You can click this releases to download zip file: https://github.com/thienvann12924/Snack-Game/releases/tag/v1.0/SnakeGame.zip
+
 **Welcome to the Snake Game!** 🐍🎮
 
 Enjoy the classic Snake Game implemented in Python using the Pygame library. Control a growing snake as it navigates the game board, eating food and avoiding collisions. Customize game settings, challenge your reflexes, and have fun with this timeless arcade game.
@@ -22,7 +24,6 @@ Enjoy the classic Snake Game implemented in Python using the Pygame library. Con
 
 ![Snake Game Screenshot](assets/snake-game-screenshot.png)
 ![Snake Game Demo](assets/demo.gif)
-
 
 - **Python**: A high-level programming language.
 - **Pygame**: A set of Python modules designed for writing video games.
@@ -57,6 +58,7 @@ Enjoy the classic Snake Game implemented in Python using the Pygame library. Con
    [Play on Replit](https://replit.com/@witraf/Snake-Game)
 
 ## SUMMARY: IN TERMINAL: 1: "pip install pygame"; 2: run "python main.py".
+
 ## Usage
 
 - **Menu Panel**: Click the menu button to access various game settings.
